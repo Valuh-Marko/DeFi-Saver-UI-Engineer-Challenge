@@ -13,4 +13,15 @@ export default defineConfig({
       "@styles": path.resolve(__dirname, "./src/styles"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @use "@styles/index" as *;
+          @use "@styles/base/_globals";
+          @use "@styles/base/_reset";
+        `,
+      },
+    },
+  },
 });
