@@ -65,7 +65,7 @@ export async function findPositions(
   const BATCH_SIZE = 50;
   const CONCURRENCY = 5;
 
-  while (foundPositions.length < 20 && searchStep < 10000) {
+  while (foundPositions.length < 20 && searchStep < 5000) {
     const waveSize = BATCH_SIZE * CONCURRENCY;
     const waveIndices = Array.from(
       { length: waveSize },

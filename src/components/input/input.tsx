@@ -8,6 +8,7 @@ type InputProps = {
   placeholder?: string;
   type?: string;
   error?: string;
+  dissabled?: boolean;
 };
 
 export const Input = ({
@@ -17,15 +18,17 @@ export const Input = ({
   placeholder = "",
   type = "number",
   error,
+  dissabled = false,
 }: InputProps) => {
   const [focused, setFocused] = useState(false);
 
   return (
     <div
-      className={`c-input-wrapper ${focused ? "is-focused" : ""} ${error ? "has-error" : ""}`}
+      className={`c-input-wrapper ${focused ? "is-focused" : ""} ${error ? "has-error" : ""} ${dissabled ? "is-disabled" : ""}`}
     >
       {label && <label className="c-input__label">{label}</label>}
       <input
+        disabled={dissabled}
         className="c-input__field"
         type={type}
         value={value}

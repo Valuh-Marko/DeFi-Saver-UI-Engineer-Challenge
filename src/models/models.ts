@@ -1,8 +1,27 @@
-export interface Position {
+export type Position = {
   id: number;
   ilk: string;
   urn: string;
   owner: string;
   collateral: string;
   debt: string;
-}
+};
+
+export type PositionState = {
+  startId: string;
+  collateral: string | null;
+  positions: Position[];
+  scanned: number;
+  found: number;
+  loading: boolean;
+  error: string;
+};
+
+export type PositionReducerAction =
+  | { type: "SET_START_ID"; payload: string }
+  | { type: "SET_COLLATERAL"; payload: string | null }
+  | { type: "SET_POSITIONS"; payload: Position[] }
+  | { type: "SET_PROGRESS"; payload: { scanned: number; found: number } }
+  | { type: "SET_LOADING"; payload: boolean }
+  | { type: "SET_ERROR"; payload: string }
+  | { type: "RESET_PROGRESS" };

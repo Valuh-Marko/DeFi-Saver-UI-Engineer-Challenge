@@ -1,0 +1,33 @@
+.c-table {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 0.75fr 3fr 1fr 1fr 1fr;
+  width: 100%;
+}
+
+.c-table__data {
+  background-color: $gray-900;
+  border-radius: $radius-medium;
+  border: 1px solid $gray-800;
+  width: 100%;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 5;
+  overflow: auto;
+  max-height: 560px;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #252f37;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #3d4e5c;
+    border-radius: 4px;
+  }
+}

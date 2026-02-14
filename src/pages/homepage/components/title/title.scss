@@ -1,0 +1,52 @@
+.c-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.c-title-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.c-title {
+  background: linear-gradient(90deg, #ffffff 0%, #e2e8f0 50%, #90a1b9 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: $spacing-xxl;
+  line-height: $spacing-11;
+  font-weight: 700;
+  letter-spacing: -0.53px;
+  font-family: $font-rounded;
+}
+
+.c-title-positions {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.c-positions__amount {
+  font-family: $font-rounded;
+  font-size: $font-xxxl;
+  color: $blue-gray-50;
+}
+
+.c-positions__label {
+  font-family: $font-rounded;
+  color: $blue-gray-200;
+}
+
+.c-title-tvl {
+  @extend .c-title-positions;
+}
+
+.c-tvl__amount {
+  @extend .c-positions__amount;
+}
+
+.c-tvl__label {
+  @extend .c-positions__label;
+}
