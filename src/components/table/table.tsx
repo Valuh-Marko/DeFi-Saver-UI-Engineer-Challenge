@@ -1,33 +1,52 @@
-import type { Position } from "@/models";
+import { useSort } from "@/hooks";
+import { POSITION_KEYS, type Position } from "@/models";
+import { calculateRatio } from "@/util";
+import { AnimatePresence } from "motion/react";
+import { Loader } from "../loader/loader";
+import { HeaderCell } from "./components/headerCell";
 import { Row } from "./components/row/row";
 import "./table.scss";
-import { useState } from "react";
 
 type TableProps = {
   positions: Position[];
+  collateralPrices: Record<string, number>;
+  loading?: boolean;
 };
 
-export const Table = ({ positions }: TableProps) => {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-  const tableData = [...positions];
+export const Table = ({ positions, collateralPrices, loading }: TableProps) => {
+  const tableData = positions.map((pos) => {
+    const price = collateralPrices?.[pos.ilk] ?? 0;
+    return {
+      ...pos,
+      ratio: calculateRatio(pos.collateral, pos.debt, price),
+    };
+  });
 
-  const handleOnHover = (id: number) => {
-    setHoveredId(id);
-  };
+  const { sortKey, sortDirection, setKey, sortedData } = useSort(tableData);
+
+  const columnLabels = POSITION_KEYS;
 
   return (
     <div className="c-table">
-      <div className="c-table__data">
-        {tableData.map((pos, index) => (
-          <>
-            <Row
-              key={`${pos.id}-${index}`}
-              {...pos}
-              onHover={() => handleOnHover(pos.id)}
-              isHovered={hoveredId === pos.id}
-            />
-          </>
+      <div className="c-table__header-row">
+        {columnLabels.map((label) => (
+          <HeaderCell
+            key={label}
+            label={label}
+            isSelected={sortKey === label}
+            onClick={() => setKey(label as keyof Position)}
+            sortDirection={sortKey === label ? sortDirection : undefined}
+          />
         ))}
+      </div>
+      <div className="c-table__data">
+        <AnimatePresence>
+          {loading ? (
+            <Loader />
+          ) : (
+            sortedData.map((pos) => <Row key={pos.id} {...pos} />)
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

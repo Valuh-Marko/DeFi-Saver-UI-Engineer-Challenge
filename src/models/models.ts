@@ -5,7 +5,16 @@ export type Position = {
   owner: string;
   collateral: string;
   debt: string;
+  ratio?: number;
 };
+
+export const POSITION_KEYS: (keyof Position)[] = [
+  "id",
+  "owner",
+  "collateral",
+  "debt",
+  "ratio",
+];
 
 export type PositionState = {
   startId: string;

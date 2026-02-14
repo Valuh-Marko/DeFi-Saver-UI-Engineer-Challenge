@@ -7,6 +7,7 @@ import bgImage from "@assets/bg.png";
 import { useCallback, useEffect, useReducer } from "react";
 import { Title } from "./components";
 import "./homePage.scss";
+import { useCollateralPrices } from "@/hooks/useCollateralPrices";
 
 export const HomePage = () => {
   const [state, dispatch] = useReducer(positionsReducer, {
@@ -18,6 +19,8 @@ export const HomePage = () => {
     loading: false,
     error: "",
   });
+
+  const collateralPrices = useCollateralPrices();
 
   const debouncedSearch = useCallback(
     debounce(async (idStr: string, collateral: string | null) => {
@@ -64,7 +67,6 @@ export const HomePage = () => {
       <div className="c-container">
         <Header />
         <Title />
-        {/* NOT MY CODE */}
         <div className="positions-search">
           <div
             className="inputs"
@@ -100,8 +102,11 @@ export const HomePage = () => {
           </div>
         </div>
 
-        <Table positions={state.positions} />
-        {/* NOT MY CODE */}
+        <Table
+          positions={state.positions}
+          collateralPrices={collateralPrices ?? {}}
+          loading={state.loading}
+        />
       </div>
     </div>
   );

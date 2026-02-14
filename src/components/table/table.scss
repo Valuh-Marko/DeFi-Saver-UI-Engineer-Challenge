@@ -2,10 +2,19 @@
   flex: 1;
   display: grid;
   grid-template-columns: 0.75fr 3fr 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr;
   width: 100%;
 }
 
+.c-table__header-row {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 5;
+  height: 2.75rem;
+}
+
 .c-table__data {
+  position: relative;
   background-color: $gray-900;
   border-radius: $radius-medium;
   border: 1px solid $gray-800;

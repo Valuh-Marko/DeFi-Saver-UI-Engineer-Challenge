@@ -1,0 +1,28 @@
+.c-header__cell-wrapper {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  max-width: fit-content;
+  cursor: pointer;
+
+  &--owner {
+    cursor: default;
+  }
+}
+
+.c-header__cell {
+  display: flex;
+  align-items: center;
+  padding-left: $spacing-5;
+  font-size: $font-xs;
+  font-family: $font-rounded;
+  text-transform: capitalize;
+}
+
+.c-header__sort-indicator {
+  transition: transform 0.22s $customBezier;
+
+  &.desc {
+    transform: rotate(180deg);
+  }
+}
