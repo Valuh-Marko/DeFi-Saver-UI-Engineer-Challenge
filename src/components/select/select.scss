@@ -16,6 +16,16 @@
   width: 100%;
   max-width: 230px;
   cursor: pointer;
+
+  &.is-dissabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  @include respond-to-tablet {
+    max-width: 100%;
+  }
 }
 
 .c-select__label {

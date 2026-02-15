@@ -1,0 +1,107 @@
+.c-position-card {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: $spacing-2 $spacing-5;
+  font-size: $font-small;
+  border-bottom: 0.5px solid $gray-800;
+  cursor: pointer;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.c-position-card-main {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: $spacing-1;
+  width: 100%;
+}
+
+.c-position-cell-wrapper {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 2;
+  flex-direction: column;
+}
+
+.c-position-cell {
+  display: flex;
+
+  span {
+    margin-right: $spacing-2;
+  }
+}
+
+.c-position-cell__colateral-wrapper {
+  display: flex;
+}
+
+.c-position-cell__colateral {
+  font-family: $font-rounded;
+  line-height: $font-small;
+}
+
+.c-position-cell__debt {
+  @extend .c-position-cell__colateral;
+}
+
+.c-position-cell__ilk {
+  font-family: $font-rounded;
+  line-height: $font-small;
+
+  color: $blue-gray-200;
+  margin-left: 2px;
+}
+
+.c-position-cell-label {
+  color: $blue-gray-200;
+  font-size: $font-xs;
+  line-height: $font-small;
+  font-family: $font-rounded;
+}
+
+.c-position-cell-value {
+  grid-row: span 3;
+  line-height: $font-small;
+  font-family: $font-rounded;
+
+  &--ratio {
+    font-size: $font-base;
+  }
+
+  &--owner {
+    width: 100%;
+    white-space: no-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: $font-mono;
+  }
+
+  &.risky {
+    color: $red-500;
+
+    span {
+      color: $red-700;
+    }
+  }
+
+  &.safe {
+    color: $green-500;
+
+    span {
+      color: $green-700;
+    }
+  }
+}
+
+.c-position-card-details {
+  border-top: 0.5px dashed $gray-800;
+  display: flex;
+  gap: $spacing-1;
+  padding-top: $spacing-2;
+  margin-top: $spacing-2;
+}

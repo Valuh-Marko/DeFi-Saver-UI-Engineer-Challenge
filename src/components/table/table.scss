@@ -4,6 +4,10 @@
   grid-template-columns: 0.75fr 3fr 1fr 1fr 1fr;
   grid-template-rows: auto 1fr;
   width: 100%;
+
+  @include respond-to-tablet {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .c-table__header-row {
@@ -11,6 +15,10 @@
   grid-template-columns: subgrid;
   grid-column: span 5;
   height: 2.75rem;
+
+  @include respond-to-tablet {
+    grid-column: span 4;
+  }
 }
 
 .c-table__data {
@@ -23,7 +31,7 @@
   grid-template-columns: subgrid;
   grid-column: span 5;
   overflow: auto;
-  max-height: 560px;
+  height: 560px;
 
   &::-webkit-scrollbar {
     width: 4px;

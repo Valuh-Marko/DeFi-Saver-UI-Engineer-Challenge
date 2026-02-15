@@ -14,6 +14,7 @@ type SelectProps = {
   value: string | null;
   onChange: (value: string) => void;
   options: Option[];
+  loading?: boolean;
   placeholder?: string;
 };
 
@@ -22,6 +23,7 @@ export const Select = ({
   value,
   onChange,
   options,
+  loading = false,
   placeholder = "All",
 }: SelectProps) => {
   const [open, setOpen] = useState(false);
@@ -43,7 +45,7 @@ export const Select = ({
       ref={containerRef}
       tabIndex={0}
       onClick={() => setOpen((prev) => !prev)}
-      className="c-select"
+      className={`c-select ${loading && "is-dissabled"}`}
     >
       <div className="c-select__label">{label}</div>
       <div className="c-select__value">

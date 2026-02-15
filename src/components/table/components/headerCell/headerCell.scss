@@ -7,6 +7,10 @@
 
   &--owner {
     cursor: default;
+
+    @include respond-to-tablet {
+      display: none;
+    }
   }
 }
 

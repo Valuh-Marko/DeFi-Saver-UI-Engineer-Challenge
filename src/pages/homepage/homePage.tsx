@@ -1,5 +1,5 @@
-import { Header, Input, Select, Table } from "@/components";
-import { COLLATERAL_OPTIONS } from "@/models";
+import { Header, Menu, Table } from "@/components";
+import { useCollateralPrices } from "@/hooks";
 import { positionsReducer } from "@/reducers";
 import { findPositions } from "@/services";
 import { debounce } from "@/util";
@@ -7,7 +7,6 @@ import bgImage from "@assets/bg.png";
 import { useCallback, useEffect, useReducer } from "react";
 import { Title } from "./components";
 import "./homePage.scss";
-import { useCollateralPrices } from "@/hooks/useCollateralPrices";
 
 export const HomePage = () => {
   const [state, dispatch] = useReducer(positionsReducer, {
@@ -67,41 +66,14 @@ export const HomePage = () => {
       <div className="c-container">
         <Header />
         <Title />
-        <div className="positions-search">
-          <div
-            className="inputs"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              width: "100%",
-            }}
-          >
-            <Select
-              label="Collateral Type"
-              value={state.collateral}
-              onChange={(value) =>
-                dispatch({ type: "SET_COLLATERAL", payload: value })
-              }
-              options={COLLATERAL_OPTIONS}
-              placeholder="All"
-            />
-            <Input
-              label="Start ID"
-              type="number"
-              value={state.startId}
-              onChange={(value) =>
-                dispatch({ type: "SET_START_ID", payload: value })
-              }
-              placeholder="1"
-              dissabled={state.loading || !state.collateral}
-            />
-            <p>
-              Scanned: {state.scanned}, Found: {state.found}
-            </p>
-          </div>
-        </div>
-
+        <Menu
+          collateral={state.collateral}
+          startId={state.startId}
+          scanned={state.scanned}
+          found={state.found}
+          loading={state.loading}
+          dispatch={dispatch}
+        />
         <Table
           positions={state.positions}
           collateralPrices={collateralPrices ?? {}}

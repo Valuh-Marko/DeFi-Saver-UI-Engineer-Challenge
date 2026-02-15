@@ -3,6 +3,14 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+
+  @include respond-to-tablet {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: $spacing-4;
+    column-gap: $spacing-11;
+  }
 }
 
 .c-title-container {

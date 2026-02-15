@@ -1,10 +1,11 @@
-import { useSort } from "@/hooks";
+import { useMediaQuery, useSort } from "@/hooks";
 import { POSITION_KEYS, type Position } from "@/models";
 import { calculateRatio } from "@/util";
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { Loader } from "../loader/loader";
 import { HeaderCell } from "./components/headerCell";
 import { Row } from "./components/row/row";
+import { PositionCard } from "./components/positionCard";
 import "./table.scss";
 
 type TableProps = {
@@ -14,6 +15,10 @@ type TableProps = {
 };
 
 export const Table = ({ positions, collateralPrices, loading }: TableProps) => {
+  const isTablet = useMediaQuery("tablet");
+
+  const Component = isTablet ? PositionCard : Row;
+
   const tableData = positions.map((pos) => {
     const price = collateralPrices?.[pos.ilk] ?? 0;
     return {
@@ -39,15 +44,15 @@ export const Table = ({ positions, collateralPrices, loading }: TableProps) => {
           />
         ))}
       </div>
-      <div className="c-table__data">
+      <motion.div layout className="c-table__data">
         <AnimatePresence>
           {loading ? (
             <Loader />
           ) : (
-            sortedData.map((pos) => <Row key={pos.id} {...pos} />)
+            sortedData.map((pos) => <Component key={pos.id} {...pos} />)
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
     </div>
   );
 };

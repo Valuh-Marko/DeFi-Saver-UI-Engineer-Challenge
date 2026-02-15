@@ -1,0 +1,22 @@
+.c-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-4;
+  flex-wrap: wrap;
+
+  @include respond-to-tablet {
+    justify-content: flex-start;
+  }
+}
+
+.c-menu__info {
+  font-family: $font-rounded;
+  font-size: $font-small;
+  color: $blue-gray-200;
+  margin-right: auto;
+
+  @include respond-to-tablet {
+    width: 100%;
+  }
+}
