@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react()],
+  base: "/DeFi-Saver-UI-Engineer-Challenge/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
