@@ -1,74 +1,157 @@
-# React + TypeScript + Vite
+# DeFi Saver UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **React + TypeScript** project built as a UI challenge for DeFi Saver. This project demonstrates modern React development with TypeScript, Vite, animations, and Ethereum contract integrations.
 
-Currently, two official plugins are available:
+## 🐄 Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project provides a responsive and interactive UI for managing DeFi positions. It integrates with Ethereum smart contracts and uses modern frontend tools and libraries to optimize development workflow.
 
-## React Compiler
+Key features:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Fully typed with TypeScript.
+* Uses **Vite** for fast development and build process.
+* Integrates with **viem** and **@defisaver/tokens** for Ethereum interaction.
+* Animations using `motion` for smooth UI transitions.
+* SCSS support for styling.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🔧 Tech Stack & Dependencies
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Runtime Dependencies
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* `@defisaver/tokens` — Token utilities for DeFi Saver integration
+* `viem` — Ethereum client library
+* `motion` — For animations and transitions
+* `dotenv` — Environment variable management
+* `p-limit` — Control concurrency for asynchronous tasks
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Dev Dependencies
+
+* `vite` — Fast build tool and development server
+* `typescript` — TypeScript compiler
+* `eslint`, `@eslint/js`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`, `typescript-eslint` — Code linting and style enforcement
+* `sass` — SCSS support
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Node.js >= 20
+* npm >= 9
+* Git
+
+### Installation
+
+```bash
+git clone https://github.com/Valuh-Marko/DeFi-Saver-UI-Engineer-Challenge.git
+cd DeFi-Saver-UI-Engineer-Challenge
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Start a local development server:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
-# DeFi-Saver-UI-Engineer-Challenge
+
+The app will be available at `http://localhost:5173/DeFi-Saver-UI-Engineer-Challenge/`.
+This is due to setting the base URL in order to deploy to GH pages.
+
+### Build
+
+Compile TypeScript and bundle with Vite:
+
+```bash
+npm run build
+```
+
+### Linting
+
+Check code for linting issues:
+
+```bash
+npm run lint
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+### Deployment
+
+Deploy to GitHub Pages:
+
+```bash
+npm run deploy
+```
+
+*(Make sure `homepage` in `package.json` points to the correct GitHub Pages URL.)*
+
+---
+
+## ⚡ Clean Imports with Aliases
+
+To keep imports short, readable, and maintainable, this project uses **TypeScript and Vite path aliases**.
+
+### Example Aliases
+
+| Alias | Points to |
+|-------|-----------|
+| `@components/*` | `src/components/*` |
+| `@hooks/*` | `src/hooks/*` |
+| `@lib/*` | `src/lib/*` |
+| `@styles/*` | `src/styles/*` |
+| `@models/*` | `src/models/*` |
+| `@utils/*` | `src/utils/*` |
+| `@assets/*` | `src/assets/*` |
+
+### Example Usage
+
+```ts
+import { Button } from "@components";
+import { usePositions } from "@hooks";
+import { client } from "@lib";
+import { Position } from "@models";
+```
+
+---
+
+## 📝 Project Structure
+
+```
+src/
+  ├─ assets/                       # Images, SVGs, etc.
+  ├─ components/                   # Reusable React components
+  |  ├─ index.ts                   # Used to export all the components for clean imports with Aliases
+  |  ├─ button
+  |  |  ├─ animations.ts
+  |  |  ├─ button.tsx              # React component        
+  ├─ contracts/                    # Ethereum contract ABIs and addresses
+  ├─ hooks/                        # Custom React hooks
+  ├─ lib/                          # Utility libraries
+  ├─ models/                       # TypeScript interfaces and types
+  ├─ pages/                        # Page-level components
+  |  ├─ homePage
+  |  |  ├─ homepage.tsx
+  |  |  ├─ components              # Page specific non reausable UI components
+  |  |  |  ├─ title
+  |  |  |  |  ├─ title.tsx         # Page specific non reausable component                
+  ├─ styles/                       # SCSS files
+  └─ main.tsx                      # Entry point
+```
+
+---
+
+## 🔗 Notes
+
+* Uses TypeScript project references (`tsc -b`) for type checking before building.
+* Animations are handled via `motion` library.
+* Concurrent Ethereum calls are limited via `p-limit` for performance.
+* SCSS is used for styling; you can add global and component-level styles.
