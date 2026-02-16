@@ -6,6 +6,9 @@
   max-width: fit-content;
   user-select: none;
   cursor: pointer;
+  transition:
+    border-color 0.4s $customBezier,
+    font-weight 0.5s $customBezier;
 
   &--owner {
     cursor: default;
@@ -13,6 +16,24 @@
     @include respond-to-tablet {
       display: none;
     }
+  }
+
+  &.is-selected {
+    border-color: $light-blue-200;
+  }
+
+  @include respond-to-tablet {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid $gray-800;
+    border-radius: $radius-medium;
+    background-color: $gray-900;
+    justify-content: space-between;
+    padding-right: $spacing-5;
+  }
+
+  @include respond-to-mobile {
+    min-height: 2.75rem;
   }
 }
 
@@ -29,7 +50,7 @@
   opacity: 1;
   transition: opacity 0.2s $customBezier;
 
-  &.selected {
+  &.is-selected {
     opacity: 0;
   }
 }
@@ -37,4 +58,12 @@
 .c-header__sort-indicator {
   position: absolute;
   right: -$spacing-2;
+
+  @include respond-to-tablet {
+    margin-right: $spacing-5;
+  }
+
+  @include respond-to-mobile {
+    margin-right: $spacing-2;
+  }
 }

@@ -1,0 +1,133 @@
+.c-position-card {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: $font-small;
+  padding: $spacing-5;
+  border-bottom: 0.5px solid $gray-800;
+  cursor: pointer;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  @include respond-to-tablet {
+    grid-column: span 4;
+    border: none;
+    padding-bottom: 0;
+  }
+}
+
+.c-position-card-main {
+  display: flex;
+  flex-direction: column;
+  border-radius: $radius-medium;
+  overflow: hidden;
+  padding-bottom: $spacing-1;
+  row-gap: $spacing-2;
+  width: 100%;
+  background-color: $blue-gray-900;
+
+  @include dropShadow;
+}
+
+.c-position-heading {
+  padding: $spacing-2 $spacing-5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid $blue-gray-700;
+}
+
+.c-liquidation-ratio {
+  border: 1px solid transparent;
+  text-align: center;
+  padding: $spacing-1 $spacing-2;
+  text-transform: capitalize;
+  border-radius: $radius-small;
+  font-size: $font-small;
+  font-family: $font-rounded;
+
+  &.safe {
+    background-color: $green-700;
+  }
+
+  &.risky {
+    background-color: $red-700;
+  }
+}
+
+.c-position-cell-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: $spacing-5;
+  padding-bottom: $spacing-2;
+
+  &:not(:last-of-type) {
+    border-bottom: 0.5px solid $blue-gray-700;
+  }
+}
+
+.c-position-cell {
+  display: flex;
+  align-items: flex-end;
+
+  span {
+    margin-right: $spacing-2;
+  }
+}
+
+.c-position-cell__ilk {
+  font-family: $font-rounded;
+  font-size: $font-small;
+  color: $blue-gray-200;
+  margin-left: $spacing-1;
+}
+
+.c-position-cell__label {
+  color: $blue-gray-200;
+  font-size: $font-small;
+  font-family: $font-rounded;
+  min-width: 6rem;
+  margin-right: $spacing-2;
+  position: relative;
+
+  &--heading {
+    font-size: $font-xs;
+  }
+}
+
+.c-position-cell__value {
+  min-width: 0;
+  font-size: $font-small;
+  font-family: $font-rounded;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  &--heading {
+    font-size: $font-xl;
+  }
+
+  &.risky {
+    color: $red-500;
+
+    span {
+      color: $red-700;
+    }
+  }
+
+  &.safe {
+    color: $green-500;
+
+    span {
+      color: $green-700;
+    }
+  }
+
+  &--owner {
+    font-family: $font-mono;
+  }
+}

@@ -18,6 +18,13 @@
 
   @include respond-to-tablet {
     grid-column: span 4;
+    gap: $spacing-3;
+    margin-bottom: $spacing-3;
+  }
+
+  @include respond-to-mobile {
+    grid-template-columns: 1fr 1fr;
+    height: fit-content;
   }
 }
 
@@ -46,6 +53,10 @@
   &::-webkit-scrollbar-thumb {
     background: #3d4e5c;
     border-radius: 4px;
+  }
+
+  @include respond-to-tablet {
+    grid-column: span 4;
   }
 }
 

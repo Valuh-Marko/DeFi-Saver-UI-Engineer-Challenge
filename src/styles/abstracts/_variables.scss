@@ -12,8 +12,9 @@ $font-base: 1rem;
 $font-small: 0.875rem;
 $font-large: 1.25rem;
 $font-xl: 1.5rem;
-$spacing-xxl: 2.25rem;
-$font-xxxl: 2.5rem;
+$font-2xl: 2rem;
+$font-3xl: 2.25rem;
+$font-4xl: 2.5rem;
 
 $spacing-1: 0.25rem;
 $spacing-2: 0.5rem;
@@ -32,11 +33,13 @@ $radius-medium: 8px;
 $radius-large: 12px;
 
 $blue-gray-900: #1e2329cc;
+$blue-gray-800: #13171dcc;
 $blue-gray-700: #31415880;
 $blue-gray-300: #90a1b9;
 $blue-gray-500: #45556c;
 $blue-gray-200: #b2c1cc;
 $blue-gray-50: #f9fafb;
+$light-blue-200: oklch(72.236% 0.12981 217.989 / 0.35);
 $green-500: #37b06f;
 $green-700: #277b4e;
 $red-500: #eb5757;

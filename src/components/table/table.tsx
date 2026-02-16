@@ -3,9 +3,9 @@ import { POSITION_KEYS, type Position } from "@/models";
 import { anim, calculateRatio } from "@/util";
 import { AnimatePresence, motion } from "motion/react";
 import { Loader } from "../loader/loader";
-import { HeaderCell } from "./components/headerCell";
-import { Row } from "./components/row/row";
-import { PositionCard } from "./components/positionCard";
+import { HeaderCell } from "../headerCell";
+import { Row } from "../row/row";
+import { PositionCard } from "../positionCard";
 import "./table.scss";
 import { opacity } from "./animations";
 
@@ -48,6 +48,7 @@ export const Table = ({
             label={label}
             isSelected={sortKey === label}
             onClick={() => setKey(label as keyof Position)}
+            isSortable={label === "owner" ? false : true}
             sortDirection={sortKey === label ? sortDirection : undefined}
           />
         ))}

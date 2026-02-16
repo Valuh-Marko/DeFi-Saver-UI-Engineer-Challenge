@@ -2,7 +2,12 @@
 // @ts-nocheck
 import { VAULT_MANAGER_ABI, VAULT_MANAGER_ADDRESS } from "@/contracts";
 import { client } from "@/lib";
-import type { Position } from "@/models";
+import {
+  BATCH_SIZE,
+  MAX_RESULTS,
+  MAX_SCAN_STEPS,
+  type Position,
+} from "@/models";
 import pLimit from "p-limit";
 import { formatUnits, hexToString } from "viem";
 
@@ -63,38 +68,38 @@ export async function findPositions(
   onProgress: (scanned: number, found: number) => void,
 ) {
   const foundPositions: Position[] = [];
-  let searchStep = 0;
-  const BATCH_SIZE = 50;
-  const CONCURRENCY = 5;
 
-  while (foundPositions.length < 20 && searchStep < 5000) {
-    const waveSize = BATCH_SIZE * CONCURRENCY;
+  let searchStep = 0;
+
+  while (foundPositions.length < MAX_RESULTS && searchStep < MAX_SCAN_STEPS) {
+    const waveSize = BATCH_SIZE * 5;
     const waveIndices = Array.from(
       { length: waveSize },
       (_, i) => searchStep + i,
     );
-
     const allWaveIds = waveIndices
       .map((idx) => getExpandingId(startId, idx))
       .filter((id) => id > 0);
 
-    const batches = [];
+    const batches: number[][] = [];
     for (let i = 0; i < allWaveIds.length; i += BATCH_SIZE) {
       batches.push(allWaveIds.slice(i, i + BATCH_SIZE));
     }
 
     for (const batch of batches) {
-      const positions = await LIMIT(() => processBatch(batch, targetIlk));
-      foundPositions.push(...positions);
+      if (foundPositions.length >= MAX_RESULTS) break;
+      await LIMIT(async () => {
+        if (foundPositions.length >= MAX_RESULTS) return;
+        const positions = await processBatch(batch, targetIlk);
+        foundPositions.push(...positions);
 
-      searchStep += batch.length;
-      onProgress(searchStep, Math.min(foundPositions.length, 20));
-
-      if (foundPositions.length >= 20) break;
+        searchStep += batch.length;
+        onProgress(searchStep, Math.min(foundPositions.length, MAX_RESULTS));
+      });
     }
   }
 
   return foundPositions
     .sort((a, b) => Math.abs(a.id - startId) - Math.abs(b.id - startId))
-    .slice(0, 20);
+    .slice(0, MAX_RESULTS);
 }

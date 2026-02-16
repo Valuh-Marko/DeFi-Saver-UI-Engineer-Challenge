@@ -23,6 +23,14 @@ export const positionsReducer = (
       return { ...state, error: action.payload };
     case "RESET_PROGRESS":
       return { ...state, scanned: 0, found: 0, positions: [] };
+    case "START_SEARCH":
+      return {
+        ...state,
+        error: "",
+        scanned: 0,
+        found: 0,
+        loading: true,
+      };
     default:
       return state;
   }

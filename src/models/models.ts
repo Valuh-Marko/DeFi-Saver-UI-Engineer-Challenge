@@ -33,4 +33,5 @@ export type PositionReducerAction =
   | { type: "SET_PROGRESS"; payload: { scanned: number; found: number } }
   | { type: "SET_LOADING"; payload: boolean }
   | { type: "SET_ERROR"; payload: string }
+  | { type: "START_SEARCH" }
   | { type: "RESET_PROGRESS" };

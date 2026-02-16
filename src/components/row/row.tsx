@@ -12,6 +12,11 @@ export const Row = ({ id, ilk, owner, collateral, debt, ratio }: Position) => {
     currency: "USD",
   }).format(+debt);
 
+  const safeRatio = ratio ?? 0;
+  const liquidationRatio = getLiquidationRatioClass(ratio ?? 0, ilk);
+  const formattedRatio = safeRatio.toFixed(2) ?? "0.00";
+  const [integer, decimal] = formattedRatio.split(".");
+
   return (
     <motion.div
       layout
@@ -39,17 +44,9 @@ export const Row = ({ id, ilk, owner, collateral, debt, ratio }: Position) => {
         <div className="c-cell__ilk">{ilk}</div>
       </div>
       <div className="c-cell c-cell--debt">{formattedDebt}</div>
-      <div
-        className={`c-cell c-cell--ratio ${getLiquidationRatioClass(ratio ?? 0, ilk)}`}
-      >
-        {ratio === 0 ? (
-          "0"
-        ) : (
-          <>
-            {String(ratio).split(".")[0]}
-            <span>.{String(ratio).split(".")[1]}%</span>
-          </>
-        )}
+      <div className={`c-cell c-cell--ratio ${liquidationRatio}`}>
+        {integer}
+        <span>.{decimal}%</span>
       </div>
       {isHovered && (
         <motion.div

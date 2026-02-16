@@ -1,15 +1,16 @@
 import multipleArrorw from "@assets/multipleArrow.svg";
 import sortDirectionImg from "@assets/sortDirection.svg";
 import { AnimatePresence, motion } from "motion/react";
-import "./headerCell.scss";
-import { popInOut } from "../../animations";
 import { anim } from "@/util";
+import { popInOut } from "./animations";
+import "./headerCell.scss";
 
 type HeaderCellProps = {
   label: string;
   onClick?: () => void;
   isSelected?: boolean;
   sortDirection?: "asc" | "desc";
+  isSortable: boolean;
 };
 
 export const HeaderCell = ({
@@ -17,16 +18,24 @@ export const HeaderCell = ({
   onClick,
   isSelected,
   sortDirection,
+  isSortable,
 }: HeaderCellProps) => {
-  return label === "owner" ? (
-    <div className="c-header__cell-wrapper c-header__cell-wrapper--owner">
-      <div className="c-header__cell">{label}</div>
-    </div>
-  ) : (
-    <div className="c-header__cell-wrapper" onClick={onClick}>
+  if (!isSortable) {
+    return (
+      <div className="c-header__cell-wrapper c-header__cell-wrapper--owner">
+        <div className="c-header__cell">{label}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`c-header__cell-wrapper ${isSelected ? "is-selected" : ""}`}
+      onClick={onClick}
+    >
       <div className="c-header__cell">{label}</div>
       <img
-        className={`c-multiple-arrow ${isSelected && "selected"}`}
+        className={`c-multiple-arrow ${isSelected ? "is-selected" : ""}`}
         src={multipleArrorw}
         alt="Multiple Arrow"
       />
@@ -34,7 +43,7 @@ export const HeaderCell = ({
         {sortDirection && (
           <motion.img
             {...anim(popInOut)}
-            animate={sortDirection === "asc" ? "asc" : "desc"}
+            animate={sortDirection}
             src={sortDirectionImg}
             alt="Sort Direction Arrow"
             className={`c-header__sort-indicator ${sortDirection}`}

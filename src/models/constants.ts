@@ -18,3 +18,8 @@ export const COLLATERAL_TO_COINGECKO: Record<string, string> = {
   "WBTC-A": "wrapped-bitcoin",
   "USDC-A": "usd-coin",
 };
+
+export const PAGE_SIZE = 20;
+export const MAX_RESULTS = 20;
+export const BATCH_SIZE = 50;
+export const MAX_SCAN_STEPS = 5000;

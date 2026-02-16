@@ -23,15 +23,13 @@ export const HomePage = () => {
   const debouncedSearch = useCallback(
     debounce(async (idStr: string, collateral: string | null) => {
       if (!idStr || !collateral) return;
-      const id = Number(idStr);
+      const id = parseInt(idStr, 10);
       if (isNaN(id)) {
         dispatch({ type: "SET_ERROR", payload: "Invalid ID" });
         return;
       }
 
-      dispatch({ type: "SET_ERROR", payload: "" });
-      dispatch({ type: "RESET_PROGRESS" });
-      dispatch({ type: "SET_LOADING", payload: true });
+      dispatch({ type: "START_SEARCH" });
 
       try {
         const results = await findPositions(
