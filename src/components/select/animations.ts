@@ -7,7 +7,7 @@ export const expandDown = {
     pointerEvents: "none",
     transition: {
       duration: 0.4,
-      ease: [0.76, 0, 0.24, 1],
+      ease: [0.76, 0, 0.24, 1] as const,
       delayChildren: stagger(0.05),
     },
   },
@@ -18,7 +18,7 @@ export const expandDown = {
     pointerEvents: "auto",
     transition: {
       duration: 0.4,
-      ease: [0.76, 0, 0.24, 1],
+      ease: [0.76, 0, 0.24, 1] as const,
       staggerChildren: 0.05,
       delayChildren: 0.2,
     },

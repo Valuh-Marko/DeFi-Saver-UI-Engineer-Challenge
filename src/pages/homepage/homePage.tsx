@@ -3,7 +3,6 @@ import { useCollateralPrices } from "@/hooks";
 import { positionsReducer } from "@/reducers";
 import { findPositions } from "@/services";
 import { debounce } from "@/util";
-import bgImage from "@assets/bg.png";
 import { useCallback, useEffect, useReducer } from "react";
 import { Title } from "./components";
 import "./homePage.scss";
@@ -62,7 +61,6 @@ export const HomePage = () => {
 
   return (
     <div className="c-page">
-      <img src={bgImage} alt="Background" className="c-page-background" />
       <div className="c-container">
         <Header />
         <Title />
@@ -75,6 +73,7 @@ export const HomePage = () => {
           dispatch={dispatch}
         />
         <Table
+          scanned={state.scanned}
           positions={state.positions}
           collateralPrices={collateralPrices ?? {}}
           loading={state.loading}

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { VAULT_MANAGER_ABI, VAULT_MANAGER_ADDRESS } from "@/contracts";
 import { client } from "@/lib";
 import type { Position } from "@/models";

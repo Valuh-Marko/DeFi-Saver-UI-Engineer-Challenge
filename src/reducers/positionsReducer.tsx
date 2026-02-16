@@ -8,7 +8,7 @@ export const positionsReducer = (
     case "SET_START_ID":
       return { ...state, startId: action.payload };
     case "SET_COLLATERAL":
-      return { ...state, collateral: action.payload, startId: "" };
+      return { ...state, collateral: action.payload };
     case "SET_POSITIONS":
       return { ...state, positions: action.payload };
     case "SET_PROGRESS":

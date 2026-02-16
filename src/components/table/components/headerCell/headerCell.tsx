@@ -1,6 +1,9 @@
 import multipleArrorw from "@assets/multipleArrow.svg";
 import sortDirectionImg from "@assets/sortDirection.svg";
+import { AnimatePresence, motion } from "motion/react";
 import "./headerCell.scss";
+import { popInOut } from "../../animations";
+import { anim } from "@/util";
 
 type HeaderCellProps = {
   label: string;
@@ -22,14 +25,22 @@ export const HeaderCell = ({
   ) : (
     <div className="c-header__cell-wrapper" onClick={onClick}>
       <div className="c-header__cell">{label}</div>
-      {!isSelected && <img src={multipleArrorw} alt="Multiple Arrow" />}
-      {sortDirection && (
-        <img
-          src={sortDirectionImg}
-          alt="Sort Direction Arrow"
-          className={`c-header__sort-indicator ${sortDirection}`}
-        />
-      )}
+      <img
+        className={`c-multiple-arrow ${isSelected && "selected"}`}
+        src={multipleArrorw}
+        alt="Multiple Arrow"
+      />
+      <AnimatePresence>
+        {sortDirection && (
+          <motion.img
+            {...anim(popInOut)}
+            animate={sortDirection === "asc" ? "asc" : "desc"}
+            src={sortDirectionImg}
+            alt="Sort Direction Arrow"
+            className={`c-header__sort-indicator ${sortDirection}`}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

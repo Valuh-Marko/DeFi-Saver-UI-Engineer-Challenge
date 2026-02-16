@@ -31,7 +31,7 @@
   grid-template-columns: subgrid;
   grid-column: span 5;
   overflow: auto;
-  height: 560px;
+  height: 32rem;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -47,4 +47,18 @@
     background: #3d4e5c;
     border-radius: 4px;
   }
+}
+
+.c-table__empty {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: $font-rounded;
+  font-size: $font-xl;
 }
