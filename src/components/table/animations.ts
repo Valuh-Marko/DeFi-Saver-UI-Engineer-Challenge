@@ -1,5 +1,3 @@
-import { scale } from "motion";
-
 export const opacity = {
   initial: {
     opacity: 0,
